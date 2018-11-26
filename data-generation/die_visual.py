@@ -26,7 +26,11 @@ print(frequencies)
 hist = pygal.Bar()
 
 hist.title = "Results of rolling one D6 1000 times."
-hist.x_labels = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
+hist.x_labels = []
+max_numb_slides = die_1.num_sides + die_2.num_sides
+for value in range(2, max_numb_slides):
+	hist.x_labels.append(value)
+
 hist.x_title = "Result"
 hist.y_title = "Frequency of Result"
 
