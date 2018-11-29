@@ -5,7 +5,7 @@ from pygal.maps.world import World
 from pygal.style import LightColorizedStyle as LCS, RotateStyle as RS
 
 # Список заполняется данными.
-filename = 'population_data.json'
+filename = 'json/population_data.json'
 country = 'United Kingdom'
 year = 2016
 
@@ -30,6 +30,9 @@ with open(filename) as f:
 			code = get_country_code(cntr)		
 			if code:
 				cc_population[code] = populat
+			else:
+				cnt_code = (pop_dict['Country Code']).lower()				
+				cc_population[cnt_code] = populat
 
 # Группировка численности населения.
 cc_pops_1, cc_pops_2, cc_pops_3 = {}, {}, {}
@@ -48,7 +51,7 @@ plt.title('Population of years ' + country)
 fig.autofmt_xdate()
 plt.xlabel('Years')
 plt.ylabel('Population')
-plt.show()
+# plt.show()
 
 # Мировая численность населения.
 wm_style = RS('#336699')
@@ -57,6 +60,6 @@ wm.title = 'Word Population in 2016, by Country'
 wm.add('0-10m', cc_pops_1)
 wm.add('10m-1bn', cc_pops_2)
 wm.add('>1bn', cc_pops_3)
-wm.render_to_file('word_population.svg')
+wm.render_to_file('svg/word_population.svg')
 
 
