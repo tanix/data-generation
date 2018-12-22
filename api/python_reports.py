@@ -3,7 +3,7 @@ import pygal
 from pygal.style import LightColorizedStyle as LCS, LightenStyle as LS
 
 # Создание и сохранение ответа.
-url = 'https://api.github.com/search/repositories?q=language:python&sort=star'
+url = 'https://api.github.com/search/repositories?q=language:python&sort=stars'
 
 r = requests.get(url)
 print('Status code:', r.status_code)
@@ -17,8 +17,8 @@ repo_dicts = response_dict['items']
 
 names, stars = [], []
 for item in repo_dicts:
-	names.append(str(repo_dicts['name']))
-	stars.append(int(repo_dicts['stargazers_count']))
+	names.append(item['name'])
+	stars.append(item['stargazers_count'])
 
 max_stargazers_count = 0
 most_popular_item = {}
@@ -32,8 +32,13 @@ print('Full name ', most_popular_item['full_name'])
 print('Html url ', most_popular_item['html_url'])
 print('Description ', most_popular_item['description'])
 
-my_style = LS('#33366', base_style=LCS)
+my_style = LS('#333366', base_style=LCS)
 chart = pygal.Bar(style=my_style, x_label_rotation=45, show_legend=False)
+chart.title = 'Most-Starred Python Projects on GitHub'
+chart.x_labels = names
+
+chart.add('', stars)
+chart.render_to_file('python_reois.svg')
 
 
 
