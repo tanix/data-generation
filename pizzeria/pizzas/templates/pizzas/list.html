@@ -1,0 +1,13 @@
+{% extends "pizzas/base.html" %}
+
+{% block content %}
+  <p>Pizzas </p>
+  
+  <ul>
+   {% for piz in pizza %}
+      <li>{{ piz.id }} {{ piz }}</li>
+    {% empty %}
+      <li>No pizza have been added yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock content %}
