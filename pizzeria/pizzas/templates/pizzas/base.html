@@ -1,4 +1,6 @@
 <p>
-	<a href="{% url 'pizzas:index' %}">Pizzas</a>
+	<a href="{% url 'pizzas:index' %}">Home</a>
+	<a href="{% url 'pizzas:list' %}">All Pizzas</a>
+	<a href="{% url 'pizzas:new_pizza' %}">Add Pizza</a>
 </p>
 {% block content %}{% endblock content %}
